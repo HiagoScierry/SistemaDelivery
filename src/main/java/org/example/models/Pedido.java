@@ -13,8 +13,8 @@ public class Pedido {
     private List<Item> itens;
     private List<CupomDescontoEntrega> cuponsDescontoEntrega;
 
-    public Pedido(LocalDateTime data, Cliente cliente) {
-        this.dataPedido = data;
+    public Pedido(Cliente cliente) {
+        this.dataPedido = LocalDateTime.now();
         this.cliente = cliente;
     }
 
@@ -24,12 +24,17 @@ public class Pedido {
 
     public double getValorPedido(){
         Double valorPedido = 0.0;
+        double descontoAcumulado = 0.0;
 
         for (Item item : itens) {
             valorPedido += item.getValorTotal();
         }
 
-        return valorPedido + getTaxaEntrega();
+        for(CupomDescontoEntrega cupom : cuponsDescontoEntrega){
+            descontoAcumulado += cupom.getValorDesconto();
+        }
+
+        return (valorPedido + getTaxaEntrega() - descontoAcumulado);
     }
 
     public Cliente getCliente() {
@@ -44,12 +49,18 @@ public class Pedido {
         return taxaEntrega;
     }
 
-    public void aplicarDesconto(IFormaDescontoTaxaEntrega formaDescontoEntrega) {
-        cuponsDescontoEntrega.add(formaDescontoEntrega.calcularDescontoPedido(this));
+    public void aplicarDesconto(CupomDescontoEntrega cupomDesconto) {
+        cuponsDescontoEntrega.add(cupomDesconto);
     }
 
     public double getDescontoConcedido(){
-        return 0.0;
+        double descontoAcumulado = 0.0;
+
+        for(CupomDescontoEntrega cupom : cuponsDescontoEntrega){
+            descontoAcumulado += cupom.getValorDesconto();
+        }
+        
+        return descontoAcumulado;
     }
 
     public List<CupomDescontoEntrega> getCuponsDescontoEntrega() {

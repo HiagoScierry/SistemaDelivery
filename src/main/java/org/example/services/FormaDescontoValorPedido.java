@@ -6,26 +6,22 @@ import org.example.models.Pedido;
 
 public class FormaDescontoValorPedido implements IFormaDescontoTaxaEntrega {
     @Override
-    public CupomDescontoEntrega calcularDescontoPedido(Pedido pedido) {
+    public void calcularDescontoPedido(Pedido pedido) {
+        if(!seAplica(pedido))
+            return;
 
         double valorDesconto = 0.0;
 
-        double somatorioDescontosAnteriores = 0.0;
-
-        for (CupomDescontoEntrega cupom: pedido.getCuponsDescontoEntrega())
-        {
-            somatorioDescontosAnteriores += cupom.getValorDesconto();
-        }
-
-        if(pedido.getValorPedido() > 200.0 && somatorioDescontosAnteriores <= 10.0){
+        if(pedido.getValorPedido() > 200.0){
             valorDesconto = 5.0;
         }
 
-
-        return new CupomDescontoEntrega("Desconto por valor pedido", valorDesconto);
+        if(valorDesconto != 0.0)
+            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por valor pedido", valorDesconto));
     }
 
     @Override
     public Boolean seAplica(Pedido pedido) {
+        return pedido.getDescontoConcedido <= 10.0;
     }
 }
