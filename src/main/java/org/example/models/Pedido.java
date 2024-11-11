@@ -57,7 +57,7 @@ public class Pedido {
     }
 
     public String toString(){
-        String retorno = "";
+        String retorno = "PEDIDO: Data " + dataPedido + ", Taxa Entrega" + getTaxaEntrega() + "\n" ;
         String cliente = this.cliente.toString();
         String items = "";
         String cupomDesconto = "";
@@ -70,7 +70,7 @@ public class Pedido {
             cupomDesconto += cupomDescontoEntrega.toString() + " | ";
         }
 
-        retorno = cliente + "\n" + items + "\n" + cupomDesconto;
+        retorno =  cliente + "\n" + items + "\n" + cupomDesconto;
 
         return retorno;
     }
