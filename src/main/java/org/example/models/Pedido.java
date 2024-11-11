@@ -45,14 +45,14 @@ public class Pedido {
     }
 
     public void aplicarDesconto(IFormaDescontoTaxaEntrega formaDescontoEntrega) {
-        formaDescontoEntrega.calcularDescontoPedido(this);
+        cuponsDescontoEntrega.add(formaDescontoEntrega.calcularDescontoPedido(this));
     }
 
     public double getDescontoConcedido(){
         return 0.0;
     }
 
-    public List<CupomDescontoEntrega> getCupomDescontoEntrega() {
+    public List<CupomDescontoEntrega> getCuponsDescontoEntrega() {
         return cuponsDescontoEntrega;
     }
 

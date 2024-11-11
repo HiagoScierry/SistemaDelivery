@@ -5,5 +5,5 @@ import org.example.models.Pedido;
 
 public interface IFormaDescontoTaxaEntrega {
     CupomDescontoEntrega calcularDescontoPedido(Pedido pedido);
-    Boolean setAplica(Pedido pedido);
+    Boolean seAplica(Pedido pedido);
 }
