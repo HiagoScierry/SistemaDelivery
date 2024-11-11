@@ -46,7 +46,7 @@ public class Cliente {
     }
 
     public String toString() {
-        return "";
+        return "CLIENTE : " + nome + ", Tipo " + tipo + ", Logradouro " + logradouro + ", Bairro " + bairro + ", Cidade " + cidade;
     }
 
 }

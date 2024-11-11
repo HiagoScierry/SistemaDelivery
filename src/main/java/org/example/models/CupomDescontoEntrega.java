@@ -20,6 +20,6 @@ public class CupomDescontoEntrega {
 
     @Override
     public String toString() {
-        return getNomeMetodo() + " " + getValorDesconto();
+        return "CUPOM DESCONTO ENTREGA: " + "Nome metodo " + this.getNomeMetodo() + ", Valor desconto " + this.getValorDesconto();
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Pedido {
 
-    private double taxaEntrega = 5.0;
+    private double taxaEntrega = 10.0;
     private LocalDateTime dataPedido;
     private Cliente cliente;
     private List<Item> itens;
@@ -18,10 +18,18 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public void adicionarItem(Item item) {}
+    public void adicionarItem(Item item) {
+        this.itens.add(item);
+    }
 
     public double getValorPedido(){
-        return 0.0;
+        Double valorPedido = 0.0;
+
+        for (Item item : itens) {
+            valorPedido += item.getValorTotal();
+        }
+
+        return valorPedido + getTaxaEntrega();
     }
 
     public Cliente getCliente() {
@@ -29,25 +37,42 @@ public class Pedido {
     }
 
     public List<Item> getItems() {
-        return null;
+        return itens;
     }
 
     public double getTaxaEntrega() {
         return taxaEntrega;
     }
 
-    public void aplicarDesconto(IFormaDescontoTaxaEntrega desconto) {}
+    public void aplicarDesconto(IFormaDescontoTaxaEntrega formaDescontoEntrega) {
+        formaDescontoEntrega.calcularDescontoPedido(this);
+    }
 
     public double getDescontoConcedido(){
         return 0.0;
     }
 
     public List<CupomDescontoEntrega> getCupomDescontoEntrega() {
-        return null;
+        return cuponsDescontoEntrega;
     }
 
     public String toString(){
-        return "";
+        String retorno = "";
+        String cliente = this.cliente.toString();
+        String items = "";
+        String cupomDesconto = "";
+
+        for (Item item : itens) {
+            items += item.toString() + " | ";
+        }
+
+        for (CupomDescontoEntrega cupomDescontoEntrega : cuponsDescontoEntrega) {
+            cupomDesconto += cupomDescontoEntrega.toString() + " | ";
+        }
+
+        retorno = cliente + "\n" + items + "\n" + cupomDesconto;
+
+        return retorno;
     }
 
 }
