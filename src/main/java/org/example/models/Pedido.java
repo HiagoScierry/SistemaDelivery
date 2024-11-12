@@ -75,9 +75,7 @@ public class Pedido {
     }
 
     public String toString(){
-
-
-        String retorno = "PEDIDO: Data " + dataPedido.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ", Taxa Entrega" + getTaxaEntrega() + " Valor do Pedido " + getValorPedido() +  "Desconto Aplicado" + getDescontoConcedido() +  "\n" ;
+        String retorno = "PEDIDO: Data " + dataPedido.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " , Taxa Entrega " + getTaxaEntrega() + " , Valor do Pedido " + getValorPedido() +  " , Desconto Aplicado " + getDescontoConcedido() +  "\n" ;
         String cliente = this.cliente.toString();
         String items = "";
         String cupomDesconto = "";
