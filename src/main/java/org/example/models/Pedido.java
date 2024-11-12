@@ -2,20 +2,27 @@ package org.example.models;
 
 import org.example.interfaces.IFormaDescontoTaxaEntrega;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
 
     private double taxaEntrega = 10.0;
-    private LocalDateTime dataPedido;
+    private LocalDate dataPedido;
     private Cliente cliente;
     private List<Item> itens;
     private List<CupomDescontoEntrega> cuponsDescontoEntrega;
 
     public Pedido(Cliente cliente) {
-        this.dataPedido = LocalDateTime.now();
+        this.dataPedido = LocalDate.now();
         this.cliente = cliente;
+
+        this.itens = new ArrayList<>();
+        this.cuponsDescontoEntrega = new ArrayList<>();
+
     }
 
     public void adicionarItem(Item item) {
@@ -68,7 +75,9 @@ public class Pedido {
     }
 
     public String toString(){
-        String retorno = "PEDIDO: Data " + dataPedido + ", Taxa Entrega" + getTaxaEntrega() + "\n" ;
+
+
+        String retorno = "PEDIDO: Data " + dataPedido.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ", Taxa Entrega" + getTaxaEntrega() + " Valor do Pedido " + getValorPedido() +  "Desconto Aplicado" + getDescontoConcedido() +  "\n" ;
         String cliente = this.cliente.toString();
         String items = "";
         String cupomDesconto = "";
@@ -81,7 +90,7 @@ public class Pedido {
             cupomDesconto += cupomDescontoEntrega.toString() + " | ";
         }
 
-        retorno =  cliente + "\n" + items + "\n" + cupomDesconto;
+        retorno += cliente + "\n" + items + "\n" + cupomDesconto;
 
         return retorno;
     }

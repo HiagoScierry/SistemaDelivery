@@ -37,6 +37,6 @@ public class FormaDescontoTaxaPorTipoCliente implements IFormaDescontoTaxaEntreg
 
     @Override
     public Boolean seAplica(Pedido pedido) {
-        return clientesValidos.contains(pedido.getCliente().getTipo()) && pedido.getDescontoConcedido <= 10.0;
+        return clientesValidos.contains(pedido.getCliente().getTipo()) && pedido.getDescontoConcedido() <= 10.0;
     }
 }

@@ -1,5 +1,10 @@
 package org.example;
 
+import org.example.models.Cliente;
+import org.example.models.Item;
+import org.example.models.Pedido;
+import org.example.services.CalculadoraDescontoService;
+
 public class Main {
     public static void main(String[] args) {
         CalculadoraDescontoService calculadoraDesconto = new CalculadoraDescontoService();
@@ -9,12 +14,12 @@ public class Main {
 
         pedido.adicionarItem(item);
         
-        System.out.print("------Pedido antes do calculo de desconto------");
-        pedido.toString();
+        System.out.print("------Pedido antes do calculo de desconto------\n");
+        System.out.println(pedido.toString());
 
-        calculadoraDesconto.calculadoraDesconto(pedido);
+        calculadoraDesconto.calcularDesconto(pedido);
 
-        System.out.print("\n\n------Pedido após do calculo de desconto------");
-        pedido.toString()
+        System.out.print("\n\n------Pedido após do calculo de desconto------\n");
+        System.out.println(pedido.toString());
     }
 }
