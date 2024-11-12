@@ -12,7 +12,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        CalculadoraDescontoService calculadoraDesconto = new CalculadoraDescontoService(getFormaDescontoTaxaEntregas());
+        CalculadoraDescontoService calculadoraDesconto = new CalculadoraDescontoService(getListFormaDesconto());
         Cliente cliente = new Cliente("Fulano", "Ouro", "Rua sem saída", "Centro", "Alegre");
         Item item = new Item("X-Calango", 1, 19.0, "Alimentação");
         Pedido pedido = new Pedido(cliente);
@@ -28,7 +28,7 @@ public class Main {
         System.out.println(pedido.toString());
     }
 
-    private static List<IFormaDescontoTaxaEntrega> getFormaDescontoTaxaEntregas() {
+    private static List<IFormaDescontoTaxaEntrega> getListFormaDesconto() {
         List<IFormaDescontoTaxaEntrega> formasDesconto = new ArrayList<>();
 
         IFormaDescontoTaxaEntrega formaDeDescontoPorItem = new FormaDescontoPorItem();
