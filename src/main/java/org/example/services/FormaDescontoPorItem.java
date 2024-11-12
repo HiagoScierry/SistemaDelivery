@@ -9,10 +9,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FormaDescontoPorItem implements IFormaDescontoTaxaEntrega {
-    private List<String> tipoItemValido = Arrays.asList("Alimentação", "Educação", "Lazer");
-
     @Override
-    public CupomDescontoEntrega calcularDescontoPedido(Pedido pedido) {
+    public void calcularDescontoPedido(Pedido pedido) {
+        if(!seAplica(pedido))
+            return;
 
         double valorDesconto = 0.0;
 
@@ -31,11 +31,11 @@ public class FormaDescontoPorItem implements IFormaDescontoTaxaEntrega {
             }
         }
 
-
-        return new CupomDescontoEntrega("Desconto por item", valorDesconto);
+        if(valorDesconto != 0.0)
+            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por item", valorDesconto));
     }
 
     @Override
     public Boolean seAplica(Pedido pedido) {
-        return tipoItemValido.contains(pedido.getCliente().getBairro());
+        return pedido.getDescontoConcedido() <= 10.0;
     }}

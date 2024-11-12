@@ -12,7 +12,9 @@ public class FormaDescontoTaxaPorTipoCliente implements IFormaDescontoTaxaEntreg
     private List<String> clientesValidos = Arrays.asList("Ouro", "Prata", "Bronze");
 
     @Override
-    public CupomDescontoEntrega calcularDescontoPedido(Pedido pedido) {
+    public void calcularDescontoPedido(Pedido pedido) {
+        if(!seAplica(pedido))
+            return;
 
         double valorDesconto = 0.0;
         String clienteTipo = pedido.getCliente().getTipo();
@@ -29,11 +31,12 @@ public class FormaDescontoTaxaPorTipoCliente implements IFormaDescontoTaxaEntreg
                 break;
         }
 
-        return new CupomDescontoEntrega("Desconto por Tipo Cliente", valorDesconto);
+        if(valorDesconto != 0.0)
+            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por Tipo Cliente", valorDesconto));
     }
 
     @Override
     public Boolean seAplica(Pedido pedido) {
-        return clientesValidos.contains(pedido.getCliente().getBairro());
+        return clientesValidos.contains(pedido.getCliente().getTipo()) && pedido.getDescontoConcedido <= 10.0;
     }
 }
