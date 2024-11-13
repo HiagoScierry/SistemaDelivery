@@ -6,13 +6,21 @@ import org.example.models.Item;
 import org.example.models.Pedido;
 import org.example.services.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
 
     public static void main(String[] args) {
-        CalculadoraDescontoService calculadoraDesconto = new CalculadoraDescontoService(getListFormaDesconto());
+        CalculadoraDescontoTaxaEntregaService calculadoraDescontoTaxaEntregaService = new CalculadoraDescontoTaxaEntregaService();
+
+        IFormaDescontoTaxaEntrega formaDeDescontoPorItem = new FormaDescontoPorItem();
+        IFormaDescontoTaxaEntrega formaDescontoPorBairro = new FormaDescontoTaxaPorBairro();
+        IFormaDescontoTaxaEntrega formaDescontoPorTipoCliente = new FormaDescontoTaxaPorTipoCliente();
+        IFormaDescontoTaxaEntrega formaDescontoValorPedido = new FormaDescontoValorPedido();
+
+        calculadoraDescontoTaxaEntregaService.addMetodo(formaDeDescontoPorItem);
+        calculadoraDescontoTaxaEntregaService.addMetodo(formaDescontoPorBairro);
+        calculadoraDescontoTaxaEntregaService.addMetodo(formaDescontoPorTipoCliente);
+        calculadoraDescontoTaxaEntregaService.addMetodo(formaDescontoValorPedido);
+
         Cliente cliente = new Cliente("Fulano", "Ouro", "Rua sem saída", "Centro", "Alegre");
         Item item = new Item("X-Calango", 1, 19.0, "Alimentação");
         Pedido pedido = new Pedido(cliente);
@@ -22,25 +30,10 @@ public class Main {
         System.out.print("------Pedido antes do calculo de desconto------\n");
         System.out.println(pedido.toString());
 
-        calculadoraDesconto.calcularDesconto(pedido);
+        calculadoraDescontoTaxaEntregaService.calcularTaxaDesconto(pedido);
 
         System.out.print("\n\n------Pedido após do calculo de desconto------\n");
         System.out.println(pedido.toString());
-    }
-
-    private static List<IFormaDescontoTaxaEntrega> getListFormaDesconto() {
-        List<IFormaDescontoTaxaEntrega> formasDesconto = new ArrayList<>();
-
-        IFormaDescontoTaxaEntrega formaDeDescontoPorItem = new FormaDescontoPorItem();
-        IFormaDescontoTaxaEntrega formaDescontoPorBairro = new FormaDescontoTaxaPorBairro();
-        IFormaDescontoTaxaEntrega formaDescontoPorTipoCliente = new FormaDescontoTaxaPorTipoCliente();
-        IFormaDescontoTaxaEntrega formaDescontoValorPedido = new FormaDescontoValorPedido();
-
-        formasDesconto.add(formaDeDescontoPorItem);
-        formasDesconto.add(formaDescontoPorBairro);
-        formasDesconto.add(formaDescontoPorTipoCliente);
-        formasDesconto.add(formaDescontoValorPedido);
-        return formasDesconto;
     }
 
 }
