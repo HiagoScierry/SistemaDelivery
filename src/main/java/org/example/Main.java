@@ -11,16 +11,6 @@ public class Main {
     public static void main(String[] args) {
         CalculadoraDescontoTaxaEntregaService calculadoraDescontoTaxaEntregaService = new CalculadoraDescontoTaxaEntregaService();
 
-        IFormaDescontoTaxaEntrega formaDeDescontoPorItem = new FormaDescontoPorItem();
-        IFormaDescontoTaxaEntrega formaDescontoPorBairro = new FormaDescontoTaxaPorBairro();
-        IFormaDescontoTaxaEntrega formaDescontoPorTipoCliente = new FormaDescontoTaxaPorTipoCliente();
-        IFormaDescontoTaxaEntrega formaDescontoValorPedido = new FormaDescontoValorPedido();
-
-        calculadoraDescontoTaxaEntregaService.addMetodo(formaDeDescontoPorItem);
-        calculadoraDescontoTaxaEntregaService.addMetodo(formaDescontoPorBairro);
-        calculadoraDescontoTaxaEntregaService.addMetodo(formaDescontoPorTipoCliente);
-        calculadoraDescontoTaxaEntregaService.addMetodo(formaDescontoValorPedido);
-
         Cliente cliente = new Cliente("Fulano", "Ouro", "Rua sem saída", "Centro", "Alegre");
         Item item = new Item("X-Calango", 1, 19.0, "Alimentação");
         Pedido pedido = new Pedido(cliente);

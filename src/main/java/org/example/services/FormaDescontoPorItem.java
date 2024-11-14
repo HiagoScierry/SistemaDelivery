@@ -20,13 +20,13 @@ public class FormaDescontoPorItem implements IFormaDescontoTaxaEntrega {
         {
             switch (item.getTipo()) {
                 case "Alimentação":
-                    valorDesconto += 5.0;
+                    valorDesconto += item.getValorTotal() * 0.05;
                     break;
                 case "Educação":
-                    valorDesconto += 2.0;
+                    valorDesconto += item.getValorTotal() * 0.20;
                     break;
                 case "Lazer":
-                    valorDesconto += 1.5;
+                    valorDesconto += item.getValorTotal() * 0.15;
                     break;
             }
         }

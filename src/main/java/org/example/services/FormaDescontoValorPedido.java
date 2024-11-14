@@ -12,8 +12,8 @@ public class FormaDescontoValorPedido implements IFormaDescontoTaxaEntrega {
 
         double valorDesconto = 0.0;
 
-        if(pedido.getValorPedido() > 200.0){
-            valorDesconto = 5.0;
+        if(pedido.getValorPedido() > 2000.0){
+            valorDesconto = pedido.getValorPedido() * 0.15;
         }
 
         if(valorDesconto != 0.0)

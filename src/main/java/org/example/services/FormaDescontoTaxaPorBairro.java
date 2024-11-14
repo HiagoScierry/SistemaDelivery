@@ -21,13 +21,13 @@ public class FormaDescontoTaxaPorBairro implements IFormaDescontoTaxaEntrega {
 
         switch (bairroCliente) {
             case "Centro":
-                valorDesconto = 2.0;
+                valorDesconto = pedido.getTaxaEntrega() * 0.20;
                 break;
             case "Bela Vista":
-                valorDesconto = 3.0;
+                valorDesconto = pedido.getTaxaEntrega() * 0.30;
                 break;
             case "Cidade Maravilhosa":
-                valorDesconto = 1.5;
+                valorDesconto = pedido.getTaxaEntrega() * 0.15;
                 break;
         }
 

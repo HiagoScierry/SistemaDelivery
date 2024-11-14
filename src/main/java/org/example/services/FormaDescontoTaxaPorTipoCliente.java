@@ -21,13 +21,13 @@ public class FormaDescontoTaxaPorTipoCliente implements IFormaDescontoTaxaEntreg
 
         switch (clienteTipo) {
             case "Ouro":
-                valorDesconto = 3.0;
+                valorDesconto = pedido.getTaxaEntrega() * 0.30;
                 break;
             case "Prata":
-                valorDesconto = 2.0;
+                valorDesconto = pedido.getTaxaEntrega() * 0.20;
                 break;
             case "Bronze":
-                valorDesconto = 1.0;
+                valorDesconto = pedido.getTaxaEntrega() * 0.10;
                 break;
         }
 
