@@ -37,5 +37,5 @@ public class FormaDescontoPorItem implements IFormaDescontoTaxaEntrega {
 
     @Override
     public Boolean seAplica(Pedido pedido) {
-        return pedido.getDescontoConcedido() <= 10.0;
+        return pedido.getDescontoConcedido() <= 10.0 && pedido.getCuponsDescontoEntrega().isEmpty();
     }}

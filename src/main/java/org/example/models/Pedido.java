@@ -6,23 +6,32 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Pedido {
 
-    private double taxaEntrega = 10.0;
+    private double taxaEntrega;
     private LocalDate dataPedido;
     private Cliente cliente;
     private List<Item> itens;
+    private String codigoDeCupom;
     private List<CupomDescontoEntrega> cuponsDescontoEntrega;
 
-    public Pedido(Cliente cliente) {
-        this.dataPedido = LocalDate.now();
+    public Pedido(double taxaEntrega, LocalDate dataPedido, Cliente cliente) {
+        if (taxaEntrega < 0 || dataPedido == null || cliente == null) {
+            throw new IllegalArgumentException("Valores inválidos para criar o pedido.");
+        }
+
+        this.itens = new ArrayList<Item>();
+        this.cuponsDescontoEntrega = new ArrayList<CupomDescontoEntrega>();
+        this.taxaEntrega = taxaEntrega;
+        this.dataPedido = dataPedido;
         this.cliente = cliente;
+    }
 
-        this.itens = new ArrayList<>();
-        this.cuponsDescontoEntrega = new ArrayList<>();
-
+    public void setCodigoDeCupom(String codigoDeCupom) {
+        this.codigoDeCupom = codigoDeCupom;
     }
 
     public void adicionarItem(Item item) {
@@ -37,7 +46,7 @@ public class Pedido {
             valorPedido += item.getValorTotal();
         }
 
-        for(CupomDescontoEntrega cupom : cuponsDescontoEntrega){
+        for(CupomDescontoEntrega cupom : this.cuponsDescontoEntrega){
             descontoAcumulado += cupom.getValorDesconto();
         }
 
@@ -91,6 +100,14 @@ public class Pedido {
         retorno += cliente + "\n" + items + "\n" + cupomDesconto;
 
         return retorno;
+    }
+
+    public LocalDate getDataPedido() {
+        return dataPedido;
+    }
+
+    public String getCodigoDeCupom() {
+        return codigoDeCupom;
     }
 
 }

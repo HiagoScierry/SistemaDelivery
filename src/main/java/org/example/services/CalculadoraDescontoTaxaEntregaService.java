@@ -11,7 +11,7 @@ public class CalculadoraDescontoTaxaEntregaService {
     private List<IFormaDescontoTaxaEntrega> metodosDeDesconto;
 
     public CalculadoraDescontoTaxaEntregaService() {
-        metodosDeDesconto = getListFormaDesconto();
+        metodosDeDesconto = new ArrayList<IFormaDescontoTaxaEntrega>();
     }
 
     public void calcularTaxaDesconto(Pedido pedido) {
