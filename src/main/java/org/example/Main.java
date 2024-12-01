@@ -1,10 +1,13 @@
 package org.example;
 
-import org.example.interfaces.IFormaDescontoTaxaEntrega;
+import org.example.modules.descontoEntrega.interfaces.IFormaDescontoTaxaEntrega;
 import org.example.models.Cliente;
 import org.example.models.Item;
 import org.example.models.Pedido;
-import org.example.services.*;
+import org.example.modules.descontoEntrega.services.CalculadoraDescontoTaxaEntregaService;
+import org.example.modules.descontoEntrega.services.FormaDescontoPorCupom;
+import org.example.modules.descontoEntrega.services.FormaDescontoPorItem;
+import org.example.modules.descontoEntrega.services.FormaDescontoTaxaPorTipoCliente;
 
 import java.time.LocalDate;
 

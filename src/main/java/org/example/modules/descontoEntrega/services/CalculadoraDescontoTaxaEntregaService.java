@@ -1,6 +1,6 @@
-package org.example.services;
+package org.example.modules.descontoEntrega.services;
 
-import org.example.interfaces.IFormaDescontoTaxaEntrega;
+import org.example.modules.descontoEntrega.interfaces.IFormaDescontoTaxaEntrega;
 import org.example.models.Pedido;
 
 import java.util.ArrayList;

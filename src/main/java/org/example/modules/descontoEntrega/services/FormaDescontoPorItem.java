@@ -1,12 +1,9 @@
-package org.example.services;
+package org.example.modules.descontoEntrega.services;
 
-import org.example.interfaces.IFormaDescontoTaxaEntrega;
+import org.example.modules.descontoEntrega.interfaces.IFormaDescontoTaxaEntrega;
 import org.example.models.CupomDescontoEntrega;
 import org.example.models.Item;
 import org.example.models.Pedido;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class FormaDescontoPorItem implements IFormaDescontoTaxaEntrega {
     @Override

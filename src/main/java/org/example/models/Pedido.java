@@ -1,12 +1,8 @@
 package org.example.models;
 
-import org.example.interfaces.IFormaDescontoTaxaEntrega;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Pedido {
