@@ -7,7 +7,7 @@ import org.example.models.Pedido;
 import java.util.Arrays;
 import java.util.List;
 
-public class FormaDescontoTaxaPorBairro implements IFormaDescontoTaxaEntrega {
+public class FormaDescontoTaxaEntregaPorBairro implements IFormaDescontoTaxaEntrega {
 
     private List<String> bairrosValidos = Arrays.asList("Centro", "Bela Vista", "Cidade Maravilhosa");
 
@@ -35,8 +35,7 @@ public class FormaDescontoTaxaPorBairro implements IFormaDescontoTaxaEntrega {
             pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por Bairro", valorDesconto));
     }
 
-    @Override
-    public Boolean seAplica(Pedido pedido) {
+    private Boolean seAplica(Pedido pedido) {
         return bairrosValidos.contains(pedido.getCliente().getBairro()) && pedido.getDescontoConcedido() <= 10.0;
     }
 }

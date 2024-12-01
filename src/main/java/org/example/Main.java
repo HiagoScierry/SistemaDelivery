@@ -5,7 +5,7 @@ import org.example.models.Cliente;
 import org.example.models.Item;
 import org.example.models.Pedido;
 import org.example.modules.descontoEntrega.services.CalculadoraDescontoTaxaEntregaService;
-import org.example.modules.descontoEntrega.services.FormaDescontoPorCupom;
+import org.example.modules.descontoPedido.services.FormaDescontoPedidoPorCupom;
 import org.example.modules.descontoEntrega.services.FormaDescontoPorItem;
 import org.example.modules.descontoEntrega.services.FormaDescontoTaxaPorTipoCliente;
 
@@ -26,7 +26,7 @@ public class Main {
 
         pedido.adicionarItem(item);
 
-        IFormaDescontoTaxaEntrega formaDescontoPorCupom = new FormaDescontoPorCupom();
+        IFormaDescontoTaxaEntrega formaDescontoPorCupom = new FormaDescontoPedidoPorCupom();
         IFormaDescontoTaxaEntrega formaDescontoPorTipoCliente = new FormaDescontoTaxaPorTipoCliente();
         IFormaDescontoTaxaEntrega formaDescontoPorItem = new FormaDescontoPorItem();
 

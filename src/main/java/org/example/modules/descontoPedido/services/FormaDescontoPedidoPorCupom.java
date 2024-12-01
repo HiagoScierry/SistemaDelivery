@@ -1,16 +1,17 @@
-package org.example.modules.descontoEntrega.services;
+package org.example.modules.descontoPedido.services;
 
 import org.example.modules.descontoEntrega.interfaces.IFormaDescontoTaxaEntrega;
 import org.example.models.CupomDescontoEntrega;
 import org.example.models.Pedido;
+import org.example.modules.descontoPedido.interfaces.IFormaDescontoPedido;
 
 import java.util.HashMap;
 
-public class FormaDescontoPorCupom implements IFormaDescontoTaxaEntrega {
+public class FormaDescontoPedidoPorCupom implements IFormaDescontoPedido {
 
     private HashMap<String, Double> codigosDeDesconto;
 
-    public FormaDescontoPorCupom(){
+    public FormaDescontoPedidoPorCupom(){
         // Inicializa os códigos de desconto
         this.codigosDeDesconto = new HashMap<String, Double>();
         this.codigosDeDesconto.put("DESC10", 0.10); // 10%
@@ -34,8 +35,7 @@ public class FormaDescontoPorCupom implements IFormaDescontoTaxaEntrega {
         }
     }
 
-    @Override
-    public Boolean seAplica(Pedido pedido) {
+    private Boolean seAplica(Pedido pedido) {
         return pedido.getCodigoDeCupom() != null;
     }
 }

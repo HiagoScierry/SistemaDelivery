@@ -7,7 +7,7 @@ import org.example.models.Pedido;
 import java.util.Arrays;
 import java.util.List;
 
-public class FormaDescontoTaxaPorTipoCliente implements IFormaDescontoTaxaEntrega {
+public class FormaDescontoTaxaEntregaPorTipoCliente implements IFormaDescontoTaxaEntrega {
 
     private List<String> clientesValidos = Arrays.asList("Ouro", "Prata", "Bronze");
 
@@ -35,8 +35,7 @@ public class FormaDescontoTaxaPorTipoCliente implements IFormaDescontoTaxaEntreg
             pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por Tipo Cliente", valorDesconto));
     }
 
-    @Override
-    public Boolean seAplica(Pedido pedido) {
+    private Boolean seAplica(Pedido pedido) {
         return clientesValidos.contains(pedido.getCliente().getTipo()) && pedido.getDescontoConcedido() <= 10.0;
     }
 }
