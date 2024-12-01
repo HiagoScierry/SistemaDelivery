@@ -12,7 +12,7 @@ public class FormaDescontoTaxaEntregaPorBairro implements IFormaDescontoTaxaEntr
     private List<String> bairrosValidos = Arrays.asList("Centro", "Bela Vista", "Cidade Maravilhosa");
 
     @Override
-    public void calcularDescontoPedido(Pedido pedido) {
+    public void calcularDesconto(Pedido pedido) {
         if(!seAplica(pedido))
             return;
 
@@ -32,7 +32,7 @@ public class FormaDescontoTaxaEntregaPorBairro implements IFormaDescontoTaxaEntr
         }
 
         if(valorDesconto != 0.0)
-            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por Bairro", valorDesconto));
+            pedido.adicionarDescontoTaxaEntrega(new CupomDescontoEntrega("Desconto por Bairro", valorDesconto));
     }
 
     private Boolean seAplica(Pedido pedido) {

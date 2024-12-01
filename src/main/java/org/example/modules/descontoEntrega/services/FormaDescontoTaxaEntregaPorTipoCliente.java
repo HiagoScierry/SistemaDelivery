@@ -12,7 +12,7 @@ public class FormaDescontoTaxaEntregaPorTipoCliente implements IFormaDescontoTax
     private List<String> clientesValidos = Arrays.asList("Ouro", "Prata", "Bronze");
 
     @Override
-    public void calcularDescontoPedido(Pedido pedido) {
+    public void calcularDesconto(Pedido pedido) {
         if(!seAplica(pedido))
             return;
 
@@ -32,7 +32,7 @@ public class FormaDescontoTaxaEntregaPorTipoCliente implements IFormaDescontoTax
         }
 
         if(valorDesconto != 0.0)
-            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por Tipo Cliente", valorDesconto));
+            pedido.adicionarDescontoTaxaEntrega(new CupomDescontoEntrega("Desconto por Tipo Cliente", valorDesconto));
     }
 
     private Boolean seAplica(Pedido pedido) {

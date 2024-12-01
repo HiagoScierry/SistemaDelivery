@@ -20,9 +20,9 @@ public class FormaDescontoTaxaEntregaPorDataPedido implements IFormaDescontoTaxa
     }
 
     @Override
-    public void calcularDescontoPedido(Pedido pedido) {
+    public void calcularDesconto(Pedido pedido) {
         if(seAplica(pedido)){
-            pedido.aplicarDesconto(new CupomDescontoEntrega("Desconto por data", descontosPorData.get(pedido.getDataPedido())));
+            pedido.adicionarDescontoTaxaEntrega(new CupomDescontoEntrega("Desconto por data", descontosPorData.get(pedido.getDataPedido())));
         }
     }
 

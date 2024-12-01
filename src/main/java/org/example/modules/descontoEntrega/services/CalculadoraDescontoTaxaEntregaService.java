@@ -16,7 +16,7 @@ public class CalculadoraDescontoTaxaEntregaService {
 
     public void calcularTaxaDesconto(Pedido pedido) {
         for (IFormaDescontoTaxaEntrega forma : metodosDeDesconto) {
-            forma.calcularDescontoPedido(pedido);
+            forma.calcularDesconto(pedido);
         }
     }
 

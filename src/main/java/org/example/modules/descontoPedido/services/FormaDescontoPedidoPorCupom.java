@@ -1,7 +1,7 @@
 package org.example.modules.descontoPedido.services;
 
-import org.example.modules.descontoEntrega.interfaces.IFormaDescontoTaxaEntrega;
 import org.example.models.CupomDescontoEntrega;
+import org.example.models.CupomDescontoPedido;
 import org.example.models.Pedido;
 import org.example.modules.descontoPedido.interfaces.IFormaDescontoPedido;
 
@@ -20,14 +20,14 @@ public class FormaDescontoPedidoPorCupom implements IFormaDescontoPedido {
     }
 
     @Override
-    public void calcularDescontoPedido(Pedido pedido) {
+    public void calcularDesconto(Pedido pedido) {
         if(seAplica(pedido)){
             String codigoAplicado = pedido.getCodigoDeCupom();
 
             double valorDescontoCupom = codigosDeDesconto.getOrDefault(codigoAplicado, 0.0);
 
             if(valorDescontoCupom > 0){
-                pedido.aplicarDesconto(new CupomDescontoEntrega(
+                pedido.adicionarDescontoPedido(new CupomDescontoPedido(
                         "Desconto por Cupom " + codigoAplicado,
                         valorDescontoCupom
                 ));
@@ -36,6 +36,6 @@ public class FormaDescontoPedidoPorCupom implements IFormaDescontoPedido {
     }
 
     private Boolean seAplica(Pedido pedido) {
-        return pedido.getCodigoDeCupom() != null;
+        return pedido.getCodigoDeCupom() != null && pedido.getCuponsDescontoPedido().isEmpty();
     }
 }
