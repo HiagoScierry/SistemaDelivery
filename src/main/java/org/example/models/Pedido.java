@@ -100,17 +100,22 @@ public class Pedido {
         String retorno = "PEDIDO: Data " + dataPedido.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " , Taxa Entrega " + getTaxaEntrega() + " , Valor do Pedido " + getValorPedido() +  " , Desconto Aplicado " + getDescontoConcedido() +  "\n" ;
         String cliente = this.cliente.toString();
         String items = "";
-        String cupomDesconto = "";
+        String cupomDescontoTaxaEntrega = "DESCONTO NA ENTREGA =>";
+        String cupomDescontoPedido = "DESCONTO NO PEDIDO =>";
 
         for (Item item : itens) {
             items += item.toString() + " | ";
         }
 
-        for (CupomDescontoEntrega cupomDescontoEntrega : cuponsDescontoEntrega) {
-            cupomDesconto += cupomDescontoEntrega.toString() + " | ";
+        for (CupomDescontoEntrega cupomDesconto : cuponsDescontoEntrega) {
+            cupomDescontoTaxaEntrega += cupomDesconto.toString() + " | ";
         }
 
-        retorno += cliente + "\n" + items + "\n" + cupomDesconto;
+        for (CupomDescontoPedido cupomDesconto : cuponsDescontoPedido){
+            cupomDescontoPedido += cupomDesconto.toString()  + " | ";
+        }
+
+        retorno += cliente + "\n" + items + "\n" + cupomDescontoTaxaEntrega + "\n" + cupomDescontoPedido + "\n";
 
         return retorno;
     }
