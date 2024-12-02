@@ -11,7 +11,8 @@ public class CalculadoraDescontoTaxaEntregaService {
     private List<IFormaDescontoTaxaEntrega> metodosDeDesconto;
 
     public CalculadoraDescontoTaxaEntregaService() {
-        metodosDeDesconto = new ArrayList<IFormaDescontoTaxaEntrega>();
+//        metodosDeDesconto = new ArrayList<IFormaDescontoTaxaEntrega>();
+        this.metodosDeDesconto = getListFormaDesconto();
     }
 
     public void calcularTaxaDesconto(Pedido pedido) {
@@ -31,15 +32,18 @@ public class CalculadoraDescontoTaxaEntregaService {
     private static List<IFormaDescontoTaxaEntrega> getListFormaDesconto() {
         List<IFormaDescontoTaxaEntrega> formasDesconto = new ArrayList<>();
 
-        IFormaDescontoTaxaEntrega formaDeDescontoPorItem = new FormaDescontoPorItem();
-        IFormaDescontoTaxaEntrega formaDescontoPorBairro = new FormaDescontoTaxaPorBairro();
-        IFormaDescontoTaxaEntrega formaDescontoPorTipoCliente = new FormaDescontoTaxaPorTipoCliente();
-        IFormaDescontoTaxaEntrega formaDescontoValorPedido = new FormaDescontoValorPedido();
+        IFormaDescontoTaxaEntrega formaDescontoTaxaEntregaPorItem = new FormaDescontoTaxaEntregaPorItem();
+        IFormaDescontoTaxaEntrega formaDescontoTaxaEntregaPorBairro = new FormaDescontoTaxaEntregaPorBairro();
+        IFormaDescontoTaxaEntrega formaDescontoTaxaEntregaPorTipoCliente = new FormaDescontoTaxaEntregaPorTipoCliente();
+        IFormaDescontoTaxaEntrega formaDescontoTaxaEntregaValorPedido = new FormaDescontoTaxaEntregaValorPedido();
+        IFormaDescontoTaxaEntrega formaDescontoTaxaEntregaPorDataPedido = new FormaDescontoTaxaEntregaPorDataPedido();
 
-        formasDesconto.add(formaDeDescontoPorItem);
-        formasDesconto.add(formaDescontoPorBairro);
-        formasDesconto.add(formaDescontoPorTipoCliente);
-        formasDesconto.add(formaDescontoValorPedido);
+        formasDesconto.add(formaDescontoTaxaEntregaPorItem);
+        formasDesconto.add(formaDescontoTaxaEntregaPorBairro);
+        formasDesconto.add(formaDescontoTaxaEntregaPorTipoCliente);
+        formasDesconto.add(formaDescontoTaxaEntregaValorPedido);
+        formasDesconto.add(formaDescontoTaxaEntregaPorDataPedido);
+
         return formasDesconto;
     }
 
