@@ -1,4 +1,4 @@
-package org.example.services;
+package org.example.shared.services;
 
 import java.util.Random;
 
