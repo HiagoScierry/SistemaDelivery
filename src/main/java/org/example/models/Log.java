@@ -1,11 +1,13 @@
 package org.example.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Log {
 
     private String nomeUsuario;
-    private LocalDateTime data;
+    private LocalDate data;
+    private LocalTime hora;
     private String codigoPedido;
     private String nomeOperacao;
     private String nomeCliente;
@@ -15,7 +17,8 @@ public class Log {
         this.codigoPedido = codigoPedido;
         this.nomeOperacao = nomeOperacao;
         this.nomeCliente = nomeCliente;
-        this.data = LocalDateTime.now();
+        this.data = LocalDate.now();
+        this.hora = LocalTime.now();
     }
 
     //getters
@@ -36,8 +39,12 @@ public class Log {
         return nomeCliente;
     }
 
-    public LocalDateTime getData() {
+    public LocalDate getData() {
         return data;
+    }
+
+    public String getHora() {
+        return hora.toString();
     }
 
 }
