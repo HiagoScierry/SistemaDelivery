@@ -4,22 +4,18 @@ import org.example.dao.interfaces.ILogSQLiteDAO;
 import org.example.models.Log;
 import org.example.shared.config.database.SQLiteConnection;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class LogSQLiteDAO implements ILogSQLiteDAO {
 
     public LogSQLiteDAO() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS `log` ("
                 + "`id` INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "`date` DATE,"
-                + "`hour` TIME,"
+                + "`date` DATETIME,"
                 + "`nomeUsuario` TEXT, "
                 + "`codigoPedio` TEXT, "
                 + "`nomeOperacao` TEXT, "
-                + "`nomeCliente` TEXT, "
+                + "`nomeCliente` TEXT "
                 + ")";
 
         try (Statement sqliteConnection = SQLiteConnection.getConexao().createStatement()) {
@@ -31,16 +27,15 @@ public class LogSQLiteDAO implements ILogSQLiteDAO {
 
     @Override
     public void insert(Log log) {
-        String sql = "INSERT INTO log (date, hour, nomeUsuario, codigoPedio, nomeOperacao, nomeCliente) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO log (date, nomeUsuario, codigoPedio, nomeOperacao, nomeCliente) VALUES (?, ?, ?, ?, ?);";
 
         try (PreparedStatement preparedStatement = SQLiteConnection.getConexao().prepareStatement(sql)) {
 
-            preparedStatement.setDate(1, Date.valueOf(log.getData()));
-            preparedStatement.setDate(2, Date.valueOf(log.getHora()));
-            preparedStatement.setString(3, log.getNomeUsuario());
-            preparedStatement.setString(4, log.getCodigoPedido());
-            preparedStatement.setString(5, log.getNomeOperacao());
-            preparedStatement.setString(6, log.getNomeCliente());
+            preparedStatement.setTimestamp(1, Timestamp.valueOf(log.getData()));
+            preparedStatement.setString(2, log.getNomeUsuario());
+            preparedStatement.setString(3, String.valueOf(log.getCodigoPedido()));
+            preparedStatement.setString(4, log.getNomeOperacao());
+            preparedStatement.setString(5, log.getNomeCliente());
 
             preparedStatement.executeUpdate();
 

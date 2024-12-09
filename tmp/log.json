@@ -1,0 +1,19 @@
+[ {
+  "nomeUsuario" : "Gerente",
+  "data" : "2024-12-08T21:34:12.191147",
+  "codigoPedido" : 7,
+  "nomeOperacao" : "Realiza pedido",
+  "nomeCliente" : "Fulano"
+}, {
+  "nomeUsuario" : "Gerente",
+  "data" : "2024-12-08T21:34:12.191147",
+  "codigoPedido" : 7,
+  "nomeOperacao" : "Realiza pedido",
+  "nomeCliente" : "Fulano"
+}, {
+  "nomeUsuario" : "Gerente",
+  "data" : "2024-12-08T21:34:12.191147",
+  "codigoPedido" : 7,
+  "nomeOperacao" : "Realiza pedido",
+  "nomeCliente" : "Fulano"
+} ]

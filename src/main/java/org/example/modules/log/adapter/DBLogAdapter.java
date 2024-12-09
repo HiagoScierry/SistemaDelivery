@@ -1,10 +1,10 @@
-package org.example.modules.log.services;
+package org.example.modules.log.adapter;
 
 import org.example.dao.sqlite.LogSQLiteDAO;
 import org.example.models.Log;
-import org.example.modules.log.interfaces.ILog;
+import org.example.modules.log.interfaces.ILogAdapter;
 
-public class DBLog implements ILog {
+public class DBLogAdapter implements ILogAdapter {
     @Override
     public void escreve(Log logData) {
         try {

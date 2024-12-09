@@ -11,9 +11,9 @@ public class SQLiteConnection {
 
     public static Connection getConexao() throws Exception {
         Dotenv dotenv = Dotenv.load();
-        url = dotenv.get("CAMINHO_BANCO_DADOS");
+        url = dotenv.get("DATABASE_PATH");
         if(url == null){
-            url = ("CAMINHO_BANCO_DADOS");
+            url = ("DATABASE_PATH");
         }
 
         try {

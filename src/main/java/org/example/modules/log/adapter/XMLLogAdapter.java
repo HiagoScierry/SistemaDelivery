@@ -1,10 +1,13 @@
-package org.example.modules.log.services;
+package org.example.modules.log.adapter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.example.models.Log;
-import org.example.modules.log.interfaces.ILog;
+import org.example.modules.log.interfaces.ILogAdapter;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,38 +17,37 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XMLLog implements ILog {
+public class XMLLogAdapter implements ILogAdapter {
     private final String filePath;
     private final XmlMapper xmlMapper;
+    private final List<Log> logs;
 
     // Construtor para inicializar o caminho do arquivo e configurar o XmlMapper
-    public XMLLog(String filePath) {
-        this.filePath = filePath;
+    public XMLLogAdapter() {
+        this.logs = new ArrayList<>();
+        Dotenv dotenv = Dotenv.load();
 
-        // Configuração para formatar a data e hora no formato desejado
+        this.filePath = dotenv.get("LOG_FILE_PATH") + "log.xml";
+        System.out.println(this.filePath);
+
+        // Configuração do ObjectMapper com suporte a LocalDateTime
         this.xmlMapper = new XmlMapper();
-        SimpleModule module = new SimpleModule();
-        module.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
-        xmlMapper.registerModule(module);
+        this.xmlMapper.registerModule(new JavaTimeModule());
+        this.xmlMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+
     }
 
     @Override
     public void escreve(Log log) {
+        String xmlStart = "<logs>";
+        String xmlEnd = "</logs>";
+
         try (FileWriter writer = new FileWriter(new File(filePath), true)) {
             String xml = xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(log);
             writer.write(xml + System.lineSeparator());
         } catch (IOException e) {
             System.err.println("Erro ao escrever no arquivo XML: " + e.getMessage());
-        }
-    }
-
-    // Serializer personalizado para formatar LocalDateTime
-    private static class LocalDateTimeSerializer extends com.fasterxml.jackson.databind.JsonSerializer<LocalDateTime> {
-        private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-
-        @Override
-        public void serialize(LocalDateTime value, com.fasterxml.jackson.core.JsonGenerator gen, com.fasterxml.jackson.databind.SerializerProvider serializers) throws IOException {
-            gen.writeString(value.format(formatter));
         }
     }
 }

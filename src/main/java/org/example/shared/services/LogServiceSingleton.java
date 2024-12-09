@@ -1,11 +1,11 @@
 package org.example.shared.services;
 
 import org.example.models.Log;
-import org.example.modules.log.interfaces.ILog;
+import org.example.modules.log.interfaces.ILogAdapter;
 
 public class LogServiceSingleton {
     private static LogServiceSingleton instance;
-    private ILog log;
+    private ILogAdapter log;
 
     private LogServiceSingleton() {
     }
@@ -18,11 +18,11 @@ public class LogServiceSingleton {
         return instance;
     }
 
-    public ILog getLog() {
+    public ILogAdapter getLog() {
         return log;
     }
 
-    public void setLog(ILog log) {
+    public void setLog(ILogAdapter log) {
         this.log = log;
     }
 
